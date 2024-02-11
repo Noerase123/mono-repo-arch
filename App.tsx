@@ -6,113 +6,118 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
+import {HomeNavigation, MessageList, ChatScreen} from './src/screens';
+import {HomeIcon, MessagesIcon} from './src/assets';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+const TabScreens = () => {
+  const routes: Array<React.ComponentProps<typeof Tab.Screen>> = [
+    {
+      name: 'HomeNavigation',
+      component: HomeNavigation,
+      options: {
+        headerShown: false,
+        tabBarShowLabel: false,
+        // tabBarLabel: 'Home',
+        tabBarActiveTintColor: '#00539F',
+        tabBarInactiveTintColor: '#A7A7A7',
+        tabBarIcon: props => {
+          return (
+            <HomeIcon
+              width={props.focused ? '36px' : '28px'}
+              height={props.focused ? '36px' : '28px'}
+              stroke={props.focused ? '#00539F' : '#A7A7A7'}
+            />
+          );
+        },
+      },
+    },
+    {
+      name: 'Messages',
+      component: MessageList,
+      options: {
+        tabBarShowLabel: false,
+        // tabBarLabel: 'Messages',
+        tabBarActiveTintColor: '#00539F',
+        tabBarInactiveTintColor: '#A7A7A7',
+        tabBarIcon: props => {
+          return (
+            <MessagesIcon
+              width={props.focused ? '36px' : '28px'}
+              height={props.focused ? '36px' : '28px'}
+              stroke={props.focused ? '#00539F' : '#A7A7A7'}
+            />
+          );
+        },
+      },
+    },
+    {
+      name: 'Messages2',
+      component: MessageList,
+      options: {
+        tabBarShowLabel: false,
+        // tabBarLabel: 'Messages',
+        tabBarActiveTintColor: '#00539F',
+        tabBarInactiveTintColor: '#A7A7A7',
+        tabBarIcon: props => {
+          return (
+            <MessagesIcon
+              width={props.focused ? '36px' : '28px'}
+              height={props.focused ? '36px' : '28px'}
+              stroke={props.focused ? '#00539F' : '#A7A7A7'}
+            />
+          );
+        },
+      },
+    },
+    {
+      name: 'Messages3',
+      component: MessageList,
+      options: {
+        tabBarShowLabel: false,
+        // tabBarLabel: 'Messages',
+        tabBarActiveTintColor: '#00539F',
+        tabBarInactiveTintColor: '#A7A7A7',
+        tabBarIcon: props => {
+          return (
+            <MessagesIcon
+              width={props.focused ? '36px' : '28px'}
+              height={props.focused ? '36px' : '28px'}
+              stroke={props.focused ? '#00539F' : '#A7A7A7'}
+            />
+          );
+        },
+      },
+    },
+  ];
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+    <Tab.Navigator initialRouteName="HomeNavigation">
+      {routes.map((route, index) => (
+        <Tab.Screen key={index} {...route} />
+      ))}
+    </Tab.Navigator>
   );
-}
+};
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="App"
+          component={TabScreens}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen name="ChatScreen" component={ChatScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
