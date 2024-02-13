@@ -1,6 +1,6 @@
 {
   "name": "message-isaac-sdk",
-  "version": "0.1.14",
+  "version": "0.1.16",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",

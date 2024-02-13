@@ -56,44 +56,6 @@ const TabScreens = () => {
         },
       },
     },
-    {
-      name: 'Messages2',
-      component: MessageList,
-      options: {
-        tabBarShowLabel: false,
-        // tabBarLabel: 'Messages',
-        tabBarActiveTintColor: '#00539F',
-        tabBarInactiveTintColor: '#A7A7A7',
-        tabBarIcon: props => {
-          return (
-            <MessagesIcon
-              width={props.focused ? '36px' : '28px'}
-              height={props.focused ? '36px' : '28px'}
-              stroke={props.focused ? '#00539F' : '#A7A7A7'}
-            />
-          );
-        },
-      },
-    },
-    {
-      name: 'Messages3',
-      component: MessageList,
-      options: {
-        tabBarShowLabel: false,
-        // tabBarLabel: 'Messages',
-        tabBarActiveTintColor: '#00539F',
-        tabBarInactiveTintColor: '#A7A7A7',
-        tabBarIcon: props => {
-          return (
-            <MessagesIcon
-              width={props.focused ? '36px' : '28px'}
-              height={props.focused ? '36px' : '28px'}
-              stroke={props.focused ? '#00539F' : '#A7A7A7'}
-            />
-          );
-        },
-      },
-    },
   ];
 
   return (

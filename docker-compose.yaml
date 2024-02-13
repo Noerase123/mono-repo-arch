@@ -1,0 +1,22 @@
+version: '3'
+services:
+  verdaccio:
+    image: verdaccio/verdaccio
+    container_name: 'verdaccio-monorepoarch'
+    networks:
+      - node-network
+    environment:
+      - VERDACCIO_PORT=4873
+    ports:
+      - '4873:4873'
+    volumes:
+      - 'verdaccio_storage:/verdaccio/storage'
+      - 'verdaccio_config:/verdaccio/conf'
+      - 'verdaccio_plugins:/verdaccio/plugins'
+volumes:
+  verdaccio_storage:
+  verdaccio_config:
+  verdaccio_plugins:
+networks:
+  node-network:
+    driver: bridge
